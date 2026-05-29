@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyCrew Academy — Malaysia Cabin Crew Guide & Simulator</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E✈️%3C/text%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+    <div class="bg-stars" id="stars"></div>
+    <div class="bg-particles" id="particles"></div>
+
+    <div id="intro-overlay">
+        <div class="intro-plane"><i class="fas fa-plane-departure"></i></div>
+        <h1 class="intro-title">SkyCrew Academy</h1>
+        <center>
+        <p class="intro-subtitle">Your Journey to the Skies Begins Here</p>
+        </center>
+        <div class="boarding-pass">
+            <div class="bp-header">
+                <span class="bp-airline"><i class="fas fa-plane"></i> SkyCrew</span>
+                <span class="bp-class">FIRST CLASS</span>
+            </div>
+            <div class="bp-route">
+                <div class="bp-city">
+                    <div class="bp-city-code">YOU</div>
+                    <div class="bp-city-name">Dreamer</div>
+                </div>
+                <div class="bp-plane-icon"><i class="fas fa-plane"></i></div>
+                <div class="bp-city">
+                    <div class="bp-city-code">CC</div>
+                    <div class="bp-city-name">Cabin Crew</div>
+                </div>
+            </div>
+            <div class="bp-details">
+                <div class="bp-detail"><label>Flight</label><span>SKY-2026</span></div>
+                <div class="bp-detail"><label>Date</label><span id="bp-date">29 MAY</span></div>
+                <div class="bp-detail"><label>Gate</label><span>A1</span></div>
+            </div>
+        </div>
+        <button class="enter-btn" onclick="enterApp()">
+            <i class="fas fa-ticket-alt"></i> Board Now
+        </button>
+    </div>
+
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-logo" onclick="showSection('home', document.querySelector('.nav-links a'))"><i class="fas fa-plane"></i> SkyCrew Academy</div>
+        <ul class="nav-links">
+            <li><a href="#" class="active" onclick="showSection('home', this)">Home</a></li>
+            <li><a href="#" onclick="showSection('guide', this)">Complete Guide</a></li>
+            <li><a href="#" onclick="showSection('airlines', this)">Airlines</a></li>
+            <li><a href="#" onclick="showSection('training', this)">Training</a></li>
+            <li><a href="#" onclick="showSection('simulator', this)">Simulator</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-content">
+
+        <section id="home" class="section active">
+            <div class="section-header">
+                <h1>Welcome Aboard, Future Cabin Crew</h1>
+                <p>Your comprehensive guide to becoming a Flight Attendant in Malaysia. From requirements to your first flight.</p>
+            </div>
+            <div class="grid-3">
+                <div class="glass-card hover-lift" onclick="showSection('guide', document.querySelectorAll('.nav-links a')[1])">
+                    <div class="card-icon pulse-icon"><i class="fas fa-book-open"></i></div>
+                    <h3 class="card-title">Complete Guide</h3>
+                    <p class="card-text">Step-by-step roadmap covering all requirements, application processes, and career paths for Malaysian airlines.</p>
+                    <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
+                </div>
+                <div class="glass-card hover-lift" onclick="showSection('training', document.querySelectorAll('.nav-links a')[3])">
+                    <div class="card-icon pulse-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3 class="card-title">Training Modules</h3>
+                    <p class="card-text">Detailed breakdown of safety procedures, service standards, grooming requirements, and certification paths.</p>
+                    <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
+                </div>
+                <div class="glass-card hover-lift" onclick="showSection('simulator', document.querySelectorAll('.nav-links a')[4])">
+                    <div class="card-icon pulse-icon"><i class="fas fa-gamepad"></i></div>
+                    <h3 class="card-title">Flight Simulator</h3>
+                    <p class="card-text">Interactive 3D scenarios testing your decision-making skills in emergencies, service, and passenger handling.</p>
+                    <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
+                </div>
+            </div>
+            <div class="highlight-box glow-box" style="margin-top: 3rem;">
+                <h3 style="font-family: 'Playfair Display', serif; color: var(--accent); margin-bottom: 1rem; font-size: 1.3rem;">
+                    <i class="fas fa-star" style="margin-right: 0.5rem;"></i>Why Become Cabin Crew in Malaysia?
+                </h3>
+                <div class="grid-2" style="margin-top: 1.5rem;">
+                    <div>
+                        <p style="color: var(--text-muted); line-height: 1.8; font-size: 0.95rem;">
+                            Malaysia's aviation industry is booming with world-class carriers like Malaysia Airlines, AirAsia, and Batik Air offering incredible opportunities. As a cabin crew member, you will enjoy competitive salaries (RM 3,500 to RM 12,000+), free travel perks, hotel stays, and the chance to explore the world while getting paid.
+                        </p>
+                    </div>
+                    <div>
+                        <p style="color: var(--text-muted); line-height: 1.8; font-size: 0.95rem;">
+                            Beyond the glamour, you will develop life-saving skills, master crisis management, and build a career with endless growth potential — from In-Flight Supervisor to Cabin Crew Trainer or even transitioning to ground operations and corporate aviation roles.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-4" style="margin-top: 2rem;">
+                <div class="glass-card stat-card" style="text-align: center;">
+                    <div class="stat-number" data-target="35">0</div>
+                    <div style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem;">Max Age</div>
+                </div>
+                <div class="glass-card stat-card" style="text-align: center;">
+                    <div class="stat-number" data-target="157">0</div>
+                    <div style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem;">Min Height (F) cm</div>
+                </div>
+                <div class="glass-card stat-card" style="text-align: center;">
+                    <div class="stat-number" data-target="165">0</div>
+                    <div style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem;">Min Height (M) cm</div>
+                </div>
+                <div class="glass-card stat-card" style="text-align: center;">
+                    <div class="stat-number" data-target="14000">0</div>
+                    <div style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem;">Max Salary (RM)</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="guide" class="section">
+            <div class="back-bar">
+                <button class="back-btn" onclick="showSection('home', document.querySelector('.nav-links a'))">
+                    <i class="fas fa-chevron-left"></i> Back to Home
+                </button>
+            </div>
+            <div class="section-header">
+                <h1>Complete Career Guide</h1>
+                <p>Everything you need to know to become a certified Cabin Crew member in Malaysia.</p>
+            </div>
+            <div class="tab-container">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" onclick="showTab('req-tab', this)">Requirements</button>
+                    <button class="tab-btn" onclick="showTab('process-tab', this)">Application Process</button>
+                    <button class="tab-btn" onclick="showTab('grooming-tab', this)">Grooming Standards</button>
+                    <button class="tab-btn" onclick="showTab('salary-tab', this)">Salary & Benefits</button>
+                </div>
+                <div id="req-tab" class="tab-content active">
+                    <div class="grid-2">
+                        <div class="glass-card">
+                            <h3 style="font-family: 'Playfair Display', serif; color: var(--accent); margin-bottom: 1.5rem; font-size: 1.3rem;">
+                                <i class="fas fa-clipboard-check" style="margin-right: 0.5rem;"></i>Basic Requirements
+                            </h3>
+                            <div class="req-item">
+                                <div class="req-icon"><i class="fas fa-id-card"></i></div>
+                                <div class="req-content">
+                                    <h4>Citizenship & Age</h4>
+                                    <p>Malaysian citizen aged between 18 to 35 years old. Some airlines accept up to 30 for females and 35 for males.</p>
+                                </div>
+                            </div>
+                            <div class="req-item">
+                                <div class="req-icon"><i class="fas fa-ruler-vertical"></i></div>
+                                <div class="req-content">
+                                    <h4>Height Requirements</h4>
+                                    <p>Female: Minimum 157cm (barefoot). Male: Minimum 165cm (barefoot). Must reach emergency equipment overhead.</p>
+                                </div>
+                            </div>
+                            <div class="req-item">
+                                <div class="req-icon"><i class="fas fa-weight"></i></div>
+                                <div class="req-content">
+                                    <h4>Weight & BMI</h4>
+                                    <p>Weight must be proportionate to height (healthy BMI range). Airlines conduct BMI checks during medical exams.</p>
+                                </div>
+                            </div>
+                            <div class="req-item">
+                                <div class="req-icon"><i class="fas fa-graduation-cap"></i></div>
+                                <div class="req-content">
+                                    <h4>Education</h4>
+                                    <p>Minimum SPM with credits in English and Mathematics. Diploma or Degree holders have an advantage.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="glass-card">
+                            <h3 style="font-family: 'Playfair Display', serif; color: var(--accent); margin-bottom: 1.5rem; font-size: 1.3rem;">
+                                <i class="fas fa-heart-pulse" style="margin-right: 0.5rem;"></i>Health & Physical
+                            </h3>
+                            <div class="req-item">
+                                <div class="req-icon"><i class="fas fa-eye"></i></div>
+                                <div class="req-content">
+                                    <h4>Eyesight</h4>
+                                    <p>Minimum 6/9 vision correctable to 6/6 with glasses or contact lenses. No color blindness. LASIK usually accepted after 6 months.</p>
+                                </div>
+                            </div>
+                            <div class="req-item">
+                                <div class="req-icon"><i class="fas fa-hand-dots"></i></div>
+                                <div class="req-content">
+                                    <h4>Tattoos & Scars</h4>
+                                    <p>No visible tattoos when wearing uniform (short sleeves, knee-length skirt). No obvious scars on visible areas.</p>
+                                </div>
+                            </div>
+                            <div class="req-item">
+                                <div class="req-icon"><i class="fas fa-tooth"></i></div>
+                                <div class="req-content">
+                                    <h4>Dental & Appearance</h4>
+                                    <p>Good dental hygiene with straight, clean teeth. Clear skin complexion. Professional appearance at all times.</p>
+                                </div>
+                            </div>
+                            <div class="req-item">
+                                <div class="req-icon"><i class="fas fa-language"></i></div>
+                                <div class="req-content">
+                                    <h4>Languages</h4>
+                                    <p>Fluent English and Bahasa Malaysia mandatory. Additional languages (Mandarin, Japanese, Arabic) are major advantages.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="highlight-box glow-box">
+                        <h4 style="color: var(--accent); margin-bottom: 1rem;"><i class="fas fa-lightbulb" style="margin-right: 0.5rem;"></i>Pro Tips for Meeting Requirements</h4>
+                        <ul style="color: var(--text-muted); line-height: 2; padding-left: 1.5rem;">
+                            <li>Start working on your English proficiency early — take IELTS or MUET for certification</li>
+                            <li>If you have tattoos, consider removal or placement that will not be visible in uniform</li>
+                            <li>Maintain a fitness routine — airlines check BMI and physical stamina during water drills</li>
+                            <li>Practice your smile and posture — first impressions during walk-in interviews matter enormously</li>
+                            <li>Learn basic phrases in Mandarin, Japanese, or Korean to stand out from other candidates</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="process-tab" class="tab-content">
+                    <div class="glass-card">
+                        <h3 style="font-family: 'Playfair Display', serif; color: var(--accent); margin-bottom: 2rem; font-size: 1.3rem;">
+                            <i class="fas fa-route" style="margin-right: 0.5rem;"></i>Application Journey
+                        </h3>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <h4>Phase 1: Online Application / Walk-In</h4>
+                                <p>Submit your resume through the airline's career portal or attend walk-in interviews. Bring copies of certificates, passport photos, full-length photo in business attire, and a well-prepared CV highlighting customer service experience.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h4>Phase 2: Initial Screening</h4>
+                                <p>Height and weight measurement, document verification, and a brief introduction round. Be confident, smile genuinely, and maintain eye contact. Dress professionally in business attire with subtle makeup.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h4>Phase 3: Group Discussion / Debate</h4>
+                                <p>You will be grouped with other candidates to discuss a topic. Airlines assess teamwork, communication skills, and leadership. Do not dominate — facilitate, listen, and build on others' ideas.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h4>Phase 4: One-on-One Interview</h4>
+                                <p>Behavioral questions about handling difficult customers, teamwork scenarios, and motivation for joining. Prepare STAR method answers (Situation, Task, Action, Result).</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h4>Phase 5: Medical Examination</h4>
+                                <p>Comprehensive health check including vision, hearing, blood tests, urine tests, X-ray, ECG, and pregnancy test (for females). Must pass CAAM medical standards.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h4>Phase 6: Training & Graduation</h4>
+                                <p>4-6 weeks of intensive training covering safety, first aid, service, and aircraft-specific procedures. Pass all exams and practical assessments to receive your Cabin Crew Attestation.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="grooming-tab" class="tab-content">
+                    <div class="grid-2">
+                        <div class="glass-card">
+                            <h3 style="font-family: 'Playfair Display', serif; color: var(--accent); margin-bottom: 1.5rem;">
+                                <i class="fas fa-female" style="margin-right: 0.5rem;"></i>Female Grooming
+                            </h3>
+                            <div class="req-item">
+                                <div class="req-icon"><i class="fas fa-cut"></i></div>
+                                <div class="req-content">
+                                    <h4>Hair</h4>
+                                    <p>Neatly tied in a bun or French twist. Hair must not touch the collar. Only natural black or dark brown colors. No flyaways — use hairspray and gel.</p>
+                                </div>
+                            </div>
+                            <div class="req-item">
+                                <div class="req-icon"><i class="fas fa-paint-brush"></i></div>
+                                <div class="req-content">
+                                    <h4>Makeup</h4>
+                                    <p>Professional makeup mandatory: foundation, powder, blush, eyeliner, mascara, and red or coral lipstick. Nails must be manicured with clear, French, or airline-approved colors only.</p>
+                                </div>
+                            </div>
+                            <div class="req-item">
+                                <div class="req-icon"><i class="fas fa-ring"></i></div>
+                                <div class="req-content">
+                                    <h4>Jewelry & Accessories</h4>
+                                    <p>One pair of small stud earrings (max 1cm). One simple ring (wedding band allowed). No necklaces, bracelets, or ankle bracelets visible. Watch must be plain and professional.</p>
+                                </div>
+                            </div>
+                            <div class="req-item">
+                                <div class="req-icon"><i class="fas fa-shoe-prints"></i></div>
+                                <div class="req-content">
+                                    <h4>Footwear & Uniform</h4>
+                                    <p>Closed-toe black leather heels (3-5cm). Skin-colored stockings mandatory. Uniform must be pressed and immaculate. Scarves tied according to airline standard.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="glass-card">
+                            <h3 style="font-family: 'Playfair Display', serif; color: var(--accent); margin-bottom: 1.5rem;">
+                                <i class="fas fa-male" style="margin-right: 0.5rem;"></i>Male Grooming
+                            </h3>
+                            <div class="req-item">
+                                <div class="req-icon"><i class="fas fa-cut"></i></div>
+                                <div class="req-content">
+                                    <h4>Hair & Facial Hair</h4>
+                                    <p>Neat, professional haircut. Sideburns not below earlobe. Clean-shaven or neatly trimmed mustache only. No beards or goatees for most Malaysian airlines.</p>
+                                </div>
+                            </div>
+                            <div class="req-item">
+                                <div class="req-icon"><i class="fas fa-hand-sparkles"></i></div>
+                                <div class="req-content">
+                                    <h4>Personal Hygiene</h4>
+                                    <p>Clean, trimmed nails. Subtle cologne (not overpowering). Fresh breath — always carry mints. Well-maintained hands and skin.</p>
+                                </div>
+                            </div>
+                            <div class="req-item">
+                                <div class="req-icon"><i class="fas fa-ring"></i></div>
+                                <div class="req-content">
+                                    <h4>Jewelry & Accessories</h4>
+                                    <p>One ring only (wedding band). No earrings, bracelets, or necklaces. Simple professional watch. Tie must be properly knotted and at correct length.</p>
+                                </div>
+                            </div>
+                            <div class="req-item">
+                                <div class="req-icon"><i class="fas fa-shoe-prints"></i></div>
+                                <div class="req-content">
+                                    <h4>Footwear & Uniform</h4>
+                                    <p>Black leather oxford shoes, polished. Black socks only. Suit must be well-fitted and pressed. Belt must match shoe color. Tie clip optional but neat.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="salary-tab" class="tab-content">
+                    <div class="glass-card">
+                        <h3 style="font-family: 'Playfair Display', serif; color: var(--accent); margin-bottom: 1.5rem;">
+                            <i class="fas fa-money-bill-wave" style="margin-right: 0.5rem;"></i>Salary Structure (Monthly Estimates)
+                        </h3>
+                        <table class="salary-table">
+                            <thead>
+                                <tr><th>Airline</th><th>Basic Salary</th><th>Allowances</th><th>Total Estimate</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Malaysia Airlines</strong></td>
+                                    <td>RM 2,500 - 3,500</td>
+                                    <td>RM 3,000 - 6,000</td>
+                                    <td style="color: var(--accent); font-weight: 600;">RM 5,500 - 9,500</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>AirAsia</strong></td>
+                                    <td>RM 1,200 - 1,800</td>
+                                    <td>RM 2,000 - 4,000</td>
+                                    <td style="color: var(--accent); font-weight: 600;">RM 3,200 - 5,800</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Batik Air Malaysia</strong></td>
+                                    <td>RM 2,000 - 2,800</td>
+                                    <td>RM 2,500 - 5,000</td>
+                                    <td style="color: var(--accent); font-weight: 600;">RM 4,500 - 7,800</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Firefly</strong></td>
+                                    <td>RM 1,800 - 2,500</td>
+                                    <td>RM 1,500 - 3,000</td>
+                                    <td style="color: var(--accent); font-weight: 600;">RM 3,300 - 5,500</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Senior Purser / Lead</strong></td>
+                                    <td>RM 4,000 - 6,000</td>
+                                    <td>RM 4,000 - 8,000</td>
+                                    <td style="color: var(--accent); font-weight: 600;">RM 8,000 - 14,000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 1rem; font-style: italic;">
+                            * Allowances include flight hours, layover per diems, meal allowances, and sector payments. Senior crew and international route specialists earn significantly more.
+                        </p>
+                    </div>
+                    <div class="grid-3" style="margin-top: 1.5rem;">
+                        <div class="glass-card hover-lift">
+                            <div class="card-icon pulse-icon"><i class="fas fa-plane"></i></div>
+                            <h3 class="card-title">Travel Perks</h3>
+                            <p class="card-text">Free or heavily discounted tickets for yourself and family. ID90/ZED fares on partner airlines worldwide. Hotel stays covered during layovers.</p>
+                        </div>
+                        <div class="glass-card hover-lift">
+                            <div class="card-icon pulse-icon"><i class="fas fa-hospital"></i></div>
+                            <h3 class="card-title">Medical & Insurance</h3>
+                            <p class="card-text">Comprehensive medical coverage, dental benefits, and group insurance. Annual medical checkups covered by the airline.</p>
+                        </div>
+                        <div class="glass-card hover-lift">
+                            <div class="card-icon pulse-icon"><i class="fas fa-chart-line"></i></div>
+                            <h3 class="card-title">Career Growth</h3>
+                            <p class="card-text">Clear promotion path: Flight Attendant to Senior FA to Purser to In-Flight Supervisor to Cabin Crew Manager to Trainer.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="airlines" class="section">
+            <div class="back-bar">
+                <button class="back-btn" onclick="showSection('home', document.querySelector('.nav-links a'))">
+                    <i class="fas fa-chevron-left"></i> Back to Home
+                </button>
+            </div>
+            <div class="section-header">
+                <h1>Malaysian Airlines</h1>
+                <p>Explore career opportunities with Malaysia's leading carriers.</p>
+            </div>
+            <div class="grid-2">
+                <div class="airline-card hover-lift">
+                    <div class="airline-logo-placeholder"><i class="fas fa-crown"></i></div>
+                    <div class="airline-name">Malaysia Airlines</div>
+                    <div class="airline-type">Full-Service National Carrier</div>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem;">
+                        Malaysia's flagship carrier with international routes across 6 continents. Known for premium service standards and the iconic "Malaysian Hospitality" brand.
+                    </p>
+                    <div class="airline-tags">
+                        <span class="tag">Wide Body</span>
+                        <span class="tag">International</span>
+                        <span class="tag">A350 / A330</span>
+                        <span class="tag">5-Star Service</span>
+                    </div>
+                </div>
+                <div class="airline-card hover-lift">
+                    <div class="airline-logo-placeholder" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.1)); color: #ef4444; border-color: rgba(239, 68, 68, 0.2);"><i class="fas fa-fire"></i></div>
+                    <div class="airline-name">AirAsia</div>
+                    <div class="airline-type">Low-Cost Carrier (LCC)</div>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem;">
+                        World's best low-cost airline with the largest fleet in Malaysia. Fast-paced environment with high flight frequency across Asia and beyond.
+                    </p>
+                    <div class="airline-tags">
+                        <span class="tag">Single Aisle</span>
+                        <span class="tag">High Frequency</span>
+                        <span class="tag">A320 / A321</span>
+                        <span class="tag">Fast Turnaround</span>
+                    </div>
+                </div>
+                <div class="airline-card hover-lift">
+                    <div class="airline-logo-placeholder" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.1)); color: #10b981; border-color: rgba(16, 185, 129, 0.2);"><i class="fas fa-feather"></i></div>
+                    <div class="airline-name">Batik Air Malaysia</div>
+                    <div class="airline-type">Full-Service Regional</div>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem;">
+                        Premium full-service airline focusing on ASEAN, Australia, and East Asia routes. Part of the Lion Air Group with growing long-haul ambitions.
+                    </p>
+                    <div class="airline-tags">
+                        <span class="tag">B737 / A330</span>
+                        <span class="tag">Regional & Long-Haul</span>
+                        <span class="tag">Growing Fleet</span>
+                    </div>
+                </div>
+                <div class="airline-card hover-lift">
+                    <div class="airline-logo-placeholder" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.1)); color: #f59e0b; border-color: rgba(245, 158, 11, 0.2);"><i class="fas fa-bolt"></i></div>
+                    <div class="airline-name">Firefly</div>
+                    <div class="airline-type">Community Airline</div>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem;">
+                        Malaysia Airlines' sister airline serving secondary cities and regional routes. ATR turboprop operations with a close-knit crew community.
+                    </p>
+                    <div class="airline-tags">
+                        <span class="tag">ATR 72-500</span>
+                        <span class="tag">Domestic & Regional</span>
+                        <span class="tag">Community Focus</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="training" class="section">
+            <div class="back-bar">
+                <button class="back-btn" onclick="showSection('home', document.querySelector('.nav-links a'))">
+                    <i class="fas fa-chevron-left"></i> Back to Home
+                </button>
+            </div>
+            <div class="section-header">
+                <h1>Training Modules</h1>
+                <p>Comprehensive breakdown of what you will learn during cabin crew training in Malaysia.</p>
+            </div>
+            <div class="progress-container">
+                <div class="progress-label">
+                    <span style="color: var(--accent); font-weight: 600;">Training Progress Overview</span>
+                    <span style="color: var(--text-muted);">6 Core Modules</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%"></div>
+                </div>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card hover-lift">
+                    <div class="card-icon pulse-icon"><i class="fas fa-shield-heart"></i></div>
+                    <h3 class="card-title">Safety & Emergency Procedures (SEP)</h3>
+                    <p class="card-text">
+                        The most critical module covering aircraft evacuation (land and water), firefighting with actual fire drills, smoke-filled cabin procedures, door operation (including failure of power assist), slide descent from full height, and crowd control during emergencies. You will practice until muscle memory takes over.
+                    </p>
+                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.05);">
+                        <span style="color: var(--accent); font-size: 0.8rem; font-weight: 600;">Duration: 2 weeks | Pass Rate Required: 100%</span>
+                    </div>
+                </div>
+                <div class="glass-card hover-lift">
+                    <div class="card-icon pulse-icon"><i class="fas fa-kit-medical"></i></div>
+                    <h3 class="card-title">First Aid & CPR (AED)</h3>
+                    <p class="card-text">
+                        Comprehensive medical training including CPR, AED usage, handling choking passengers, treating burns, fractures, and medical emergencies like heart attacks or allergic reactions at 35,000 feet. You will be certified by recognized medical institutions.
+                    </p>
+                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.05);">
+                        <span style="color: var(--accent); font-size: 0.8rem; font-weight: 600;">Duration: 1 week | Recertify every 12 months</span>
+                    </div>
+                </div>
+                <div class="glass-card hover-lift">
+                    <div class="card-icon pulse-icon"><i class="fas fa-utensils"></i></div>
+                    <h3 class="card-title">In-Flight Service & F&B</h3>
+                    <p class="card-text">
+                        Wine and beverage knowledge, food service protocols, special meal handling (kosher, halal, vegan, gluten-free), tray setup, galley management, and premium cabin dining service. Includes bar cart service and duty-free sales procedures.
+                    </p>
+                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.05);">
+                        <span style="color: var(--accent); font-size: 0.8rem; font-weight: 600;">Duration: 1 week | Practical assessment included</span>
+                    </div>
+                </div>
+                <div class="glass-card hover-lift">
+                    <div class="card-icon pulse-icon"><i class="fas fa-plane-up"></i></div>
+                    <h3 class="card-title">Aircraft Familiarization</h3>
+                    <p class="card-text">
+                        Detailed study of aircraft types operated by your airline — cabin layouts, emergency equipment locations, door types, slide/raft operations, oxygen systems, and communication equipment. You will memorize every exit and equipment location.
+                    </p>
+                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.05);">
+                        <span style="color: var(--accent); font-size: 0.8rem; font-weight: 600;">Duration: 1 week | Type-specific per aircraft</span>
+                    </div>
+                </div>
+                <div class="glass-card hover-lift">
+                    <div class="card-icon pulse-icon"><i class="fas fa-comments"></i></div>
+                    <h3 class="card-title">Communication & Customer Service</h3>
+                    <p class="card-text">
+                        PA announcements in English and Bahasa Malaysia, handling difficult passengers, conflict resolution, cultural sensitivity, upselling techniques, and delivering the airline's brand of hospitality. Role-playing is a major component.
+                    </p>
+                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.05);">
+                        <span style="color: var(--accent); font-size: 0.8rem; font-weight: 600;">Duration: 3 days | Continuous assessment</span>
+                    </div>
+                </div>
+                <div class="glass-card hover-lift">
+                    <div class="card-icon pulse-icon"><i class="fas fa-water"></i></div>
+                    <h3 class="card-title">Ditching & Water Survival</h3>
+                    <p class="card-text">
+                        Swimming proficiency test, life jacket operation, life raft boarding and management, hypothermia prevention, sea survival signaling, and passenger management during water evacuation. Conducted at swimming pools and sometimes open water.
+                    </p>
+                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.05);">
+                        <span style="color: var(--accent); font-size: 0.8rem; font-weight: 600;">Duration: 2 days | Must pass swimming test</span>
+                    </div>
+                </div>
+            </div>
+            <div class="highlight-box glow-box">
+                <h4 style="color: var(--accent); margin-bottom: 1rem;"><i class="fas fa-exclamation-triangle" style="margin-right: 0.5rem;"></i>Important Training Notes</h4>
+                <ul style="color: var(--text-muted); line-height: 2; padding-left: 1.5rem;">
+                    <li>Training is physically demanding — expect long hours, early mornings, and physical drills</li>
+                    <li>You must pass ALL modules with minimum scores (usually 80-90%) to graduate</li>
+                    <li>Failure in Safety & Emergency Procedures means automatic dismissal — no second chances</li>
+                    <li>Training is usually unpaid or with a small allowance — budget accordingly for 1-2 months</li>
+                    <li>Upon graduation, you will receive a Cabin Crew Attestation recognized by CAAM (Civil Aviation Authority of Malaysia)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="simulator" class="section">
+            <div class="back-bar">
+                <button class="back-btn" onclick="showSection('home', document.querySelector('.nav-links a'))">
+                    <i class="fas fa-chevron-left"></i> Back to Home
+                </button>
+            </div>
+            <div class="section-header">
+                <h1>3D Flight Simulator</h1>
+                <p>Test your cabin crew skills with realistic in-flight scenarios in an immersive 3D environment.</p>
+            </div>
+            <div class="sim-3d-container" id="sim3dContainer">
+                <canvas id="threeCanvas"></canvas>
+                <div class="sim-3d-overlay">
+                    <div class="sim-3d-title"><i class="fas fa-plane"></i> SkyCrew Simulator</div>
+                    <div class="sim-3d-instruction">Click anywhere to start your training flight</div>
+                </div>
+            </div>
+            <div class="sim-container" id="simContainer" style="display: none;">
+                <div class="sim-header">
+                    <div class="sim-title"><i class="fas fa-plane-departure" style="margin-right: 0.5rem;"></i>Flight SKY-2026</div>
+                    <div class="sim-stats">
+                        <div class="stat">
+                            <div class="stat-value" id="simScore">0</div>
+                            <div class="stat-label">Score</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value" id="simQuestion">1</div>
+                            <div class="stat-label">Question</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value" id="simStreak">0</div>
+                            <div class="stat-label">Streak</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sim-body" id="simBody">
+                    <div style="text-align: center; padding: 4rem 2rem;">
+                        <div style="font-size: 4rem; color: var(--accent); margin-bottom: 1.5rem;">
+                            <i class="fas fa-plane-circle-check"></i>
+                        </div>
+                        <h2 style="font-family: 'Playfair Display', serif; color: var(--text); margin-bottom: 1rem; font-size: 1.8rem;">Ready for Takeoff?</h2>
+                        <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 2rem; line-height: 1.7;">
+                            You will face 10 realistic cabin crew scenarios covering emergencies, passenger service, safety procedures, and crisis management. Each correct answer earns points. Build a streak for bonus points!
+                        </p>
+                        <button class="start-sim-btn" onclick="startSimulation()">
+                            <i class="fas fa-play"></i> Start Simulation
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="app-footer">
+            <p>Made with <i class="fas fa-heart"></i> for Future Cabin Crew of Malaysia</p>
+            <p style="margin-top: 0.5rem; font-size: 0.75rem;">SkyCrew Academy &copy; 2026 | Not affiliated with any airline. For educational purposes only.</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
